@@ -1,3 +1,4 @@
+**
 # Facial Expression Recognition Using Deep Learning
 
 **CNN | Transfer Learning | Fine-Tuning | Model Optimization | Real-Time Detection**
@@ -60,7 +61,7 @@ All evaluation metrics were calculated on the test dataset, using macro averagin
 ### Model Comparison Visualization
 
 <p align="center">
-  <img src="images/model_comparison.png" alt="Comparison of four deep learning models" width="780">
+  <img src="images/images/model_comparison.png" alt="Comparison of four deep learning models" width="780">
 </p>
 
 ## Best Performing Model
@@ -72,15 +73,15 @@ However, the training and validation results indicated some overfitting, suggest
 ### Confusion Matrix
 
 <p align="center">
-  <img src="images/confusion_matrix.png" alt="Confusion matrix for the best performing model" width="620">
+  <img src="images/images/confusion_matrix.png" alt="Confusion matrix of the optimized FP16 model" width="620">
 </p>
 
 The model performed particularly well on Happy and Surprise expressions. Fear was more difficult to recognize, and some confusion occurred between Sad and Neutral.
 
-### Training and Validation Performance
+### CNN Training and Validation Performance
 
 <p align="center">
-  <img src="images/training_curves.png" alt="Training and validation accuracy and loss curves" width="780">
+  <img src="images/images/training_curves_cnn.png" alt="CNN training and validation curves" width="780">
 </p>
 
 ## Model Optimization
@@ -103,7 +104,7 @@ FP16 significantly reduced model storage requirements while maintaining approxim
 ### Optimization Comparison
 
 <p align="center">
-  <img src="images/optimization_comparison.png" alt="FP32 versus FP16 inference speed comparison" width="700">
+  <img src="images/images/optimization_comparison.png" alt="FP32 versus FP16 inference speed comparison" width="700">
 </p>
 
 ## Model Deployment
@@ -128,16 +129,12 @@ The model was tested using four facial images, producing the following predictio
 | Happy | 99.94% |
 
 <p align="center">
-  <img src="images/prediction_results.png" alt="Facial expression predictions on test images" width="780">
+  <img src="images/images/prediction_results.png" alt="Facial expression predictions on test images" width="780">
 </p>
 
 ### Real-Time Webcam Detection
 
 A Gradio interface was implemented to detect faces and classify facial expressions from live webcam input.
-
-<p align="center">
-  <img src="images/live_webcam.png" alt="Live webcam facial expression recognition interface" width="780">
-</p>
 
 The system uses the trained ResNet18 model for inference without retraining.
 
@@ -186,3 +183,4 @@ We acknowledge SDAIA in connection with this learning project and the developmen
 ---
 
 *Built using Python, PyTorch, ResNet18, and Gradio.*
+**
