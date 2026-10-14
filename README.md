@@ -106,6 +106,12 @@ The project followed these stages:
 8. **Model Optimization:** Convert the best-performing model from FP32 to FP16.
 9. **Deployment:** Build a Gradio interface for image uploads and live webcam predictions.
 
+
+### CNN Architecture Visualization
+
+![CNN Architecture](images/images/Screenshot%202026-10-14%20104943.png)
+CNN architecture showing the layers used for facial expression classification.
+
 ### Architecture Overview
 
 **Custom CNN:**
