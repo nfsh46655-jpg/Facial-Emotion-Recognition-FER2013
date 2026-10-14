@@ -3,53 +3,128 @@
 
 **CNN | Transfer Learning | Fine-Tuning | Model Optimization | Real-Time Detection**
 
-A deep learning project that recognizes seven facial expression categories from images and live webcam input using PyTorch and ResNet18.
+**Developed by:** Noha Al-Shehri & Shahad Abu Shaheen
 
-**Developed by:** Noha Al-Shehri & Shahad Abu Shaheen  
-**Acknowledgment:** Saudi Data & Artificial Intelligence Authority (SDAIA)  
-**Dataset:** FER2013
+**Dataset:** FER2013  
+**Framework:** PyTorch  
+**Deployment:** Gradio
 
 ---
 
-## Project Overview
+## 1. Project Overview
 
-This project developed a Facial Expression Recognition system using the FER2013 dataset to classify facial expressions into seven categories:
+This project focuses on building a deep learning system capable of recognizing facial expressions from images and live webcam input.
 
-**Angry | Disgust | Fear | Happy | Neutral | Sad | Surprise**
+The system classifies facial expressions into seven categories:
 
-The project covers the complete deep learning workflow, including data preprocessing, model training, evaluation, optimization, and deployment.
+- Angry
+- Disgust
+- Fear
+- Happy
+- Neutral
+- Sad
+- Surprise
 
-The goal was to compare different deep learning approaches and identify the most effective model for facial expression classification.
+The project includes data preprocessing, CNN development, transfer learning, partial and full fine-tuning, model evaluation, optimization, and deployment.
 
-## Technologies Used
+Four approaches were compared to identify the best-performing model.
 
-- **Programming:** Python
-- **Deep Learning:** PyTorch, Torchvision
-- **Model Architecture:** CNN, ResNet18
-- **Data Processing:** NumPy, Pandas, OpenCV, Pillow
-- **Evaluation:** Scikit-learn
-- **Visualization:** Matplotlib, Seaborn
-- **Deployment:** Gradio
-- **Development Environment:** Google Colab
+## 2. Problem Description
 
-## Dataset
+Facial expression recognition is a challenging computer vision task because different facial expressions can share similar visual features.
 
-The project uses the **FER2013 dataset**, containing grayscale facial images categorized into seven facial expression classes.
+For example, Sad and Neutral expressions may be difficult to distinguish. Lighting, face orientation, and image quality can also affect predictions.
 
-Images were resized to 224 × 224 pixels and prepared for deep learning model training and evaluation.
+The objective of this project is to develop and evaluate deep learning models that can automatically classify facial expressions and demonstrate their predictions through an interactive application.
 
-## Models Implemented
+The system predicts visible facial expressions rather than a person's actual emotional state.
 
-Four deep learning approaches were implemented and evaluated:
+## 3. Dataset & Models Used
 
-1. **CNN from Scratch:** A convolutional neural network trained without pretrained weights.
-2. **Transfer Learning (Feature Extraction):** Pretrained ResNet18 with a frozen feature extractor and a trained classification layer.
-3. **Partial Fine-Tuning:** ResNet18 with selected final layers unfrozen for training.
-4. **Full Fine-Tuning:** ResNet18 with all layers trainable to adapt the model to FER2013.
+### Dataset: FER2013
 
-## Model Performance Comparison
+The FER2013 dataset contains grayscale facial images representing seven facial expression categories.
 
-All evaluation metrics were calculated on the test dataset, using macro averaging for Precision, Recall, and F1 Score.
+**Dataset characteristics:**
+
+- Original image size: 48 × 48 pixels
+- Image format: Grayscale
+- Number of classes: 7
+- Training images: 22,967
+- Validation images: 5,742
+- Test images: 7,178
+
+### Data Preprocessing
+
+The dataset was prepared using:
+
+- Training, validation, and testing splits
+- Image normalization
+- Tensor conversion
+- Data augmentation for training
+- Image resizing for ResNet18
+
+For ResNet18, images were resized to **224 × 224 pixels** and converted to three channels to match the pretrained model's expected input.
+
+### Models Implemented
+
+**1. CNN from Scratch**
+
+A custom Convolutional Neural Network was developed and trained from scratch using FER2013 images.
+
+The CNN contains four convolutional blocks with seven convolutional layers, Batch Normalization, ReLU activation, Max Pooling, and Dropout.
+
+**2. Transfer Learning (Feature Extraction)**
+
+A pretrained ResNet18 model was used.
+
+The feature extraction layers were frozen, and only the final classification layer was trained.
+
+**3. Partial Fine-Tuning**
+
+Selected final layers of ResNet18 were unfrozen.
+
+The final residual block (`layer4`) and classification layer (`fc`) were trained while the earlier layers remained frozen.
+
+**4. Full Fine-Tuning**
+
+All ResNet18 layers were unfrozen and trained to adapt the pretrained model to facial expression recognition.
+
+## 4. Workflow / Architecture
+
+### Project Workflow
+
+The project followed these stages:
+
+1. **Dataset Loading:** Load FER2013 facial images and their labels.
+2. **Data Preprocessing:** Prepare image transformations and training, validation, and testing datasets.
+3. **CNN Development:** Build and train a CNN from scratch.
+4. **Transfer Learning:** Train the ResNet18 classification layer using frozen pretrained features.
+5. **Partial Fine-Tuning:** Train selected final layers of ResNet18.
+6. **Full Fine-Tuning:** Train all layers of ResNet18.
+7. **Model Evaluation:** Compare accuracy, precision, recall, F1 Score, and confusion matrices.
+8. **Model Optimization:** Convert the best-performing model from FP32 to FP16.
+9. **Deployment:** Build a Gradio interface for image uploads and live webcam predictions.
+
+### Architecture Overview
+
+**Custom CNN:**
+
+Input Image → Convolutional Blocks → Feature Extraction → Flatten → Fully Connected Layers → 7 Expression Classes
+
+**ResNet18:**
+
+Input Image (224 × 224) → Pretrained ResNet18 Feature Extraction → Fully Connected Classification Layer → 7 Expression Classes
+
+### Live Detection Workflow
+
+Webcam / Uploaded Image → Face Detection → Image Preprocessing → Trained ResNet18 → Expression Prediction → Confidence Score
+
+## 5. Results & Evaluation
+
+### Model Performance Comparison
+
+Four models were evaluated using the test dataset.
 
 | Model | Accuracy | Precision | Recall | F1 Score |
 |---|---:|---:|---:|---:|
@@ -58,43 +133,45 @@ All evaluation metrics were calculated on the test dataset, using macro averagin
 | Partial Fine-Tuning | 60.24% | 58.15% | 54.67% | 55.62% |
 | **Full Fine-Tuning** | **68.45%** | **68.41%** | **65.78%** | **66.66%** |
 
+Precision, Recall, and F1 Score are macro-averaged.
+
 ### Model Comparison Visualization
 
 <p align="center">
   <img src="images/images/model_comparison.png"
-       alt="Comparison of four deep learning models"
-       width="780">
+       alt="Model Performance Comparison"
+       width="800">
 </p>
 
-## Best Performing Model
+### Best Performing Model
 
-**ResNet18 with Full Fine-Tuning** achieved the highest test accuracy of **68.45%**, outperforming the other three approaches.
+The **ResNet18 Full Fine-Tuning** model achieved the highest accuracy of **68.45%**.
 
-However, the training and validation results indicated some overfitting, suggesting that further generalization improvements may be beneficial.
+This indicates that training all layers of the pretrained model was more effective than the other approaches evaluated in this project.
 
 ### Confusion Matrix
 
 <p align="center">
   <img src="images/images/confusion_matrix.png"
-       alt="Optimized FP16 confusion matrix"
-       width="620">
+       alt="Confusion Matrix"
+       width="650">
 </p>
 
-The model performed particularly well on Happy and Surprise expressions. Fear was more difficult to recognize, and some confusion occurred between Sad and Neutral.
+The confusion matrix shows how the model classified each facial expression and highlights confusion between similar expressions.
 
 ### CNN Training and Validation Performance
 
 <p align="center">
   <img src="images/images/training_curves_cnn.png"
-       alt="CNN training and validation performance"
-       width="780">
+       alt="CNN Training and Validation Curves"
+       width="800">
 </p>
 
-## Model Optimization
+### Model Optimization
 
-FP16 optimization was applied to the best-performing model without additional training.
+The best-performing ResNet18 model was optimized using FP16 precision to reduce its storage requirements.
 
-| Metric | Original FP32 | Optimized FP16 |
+| Metric | FP32 | FP16 |
 |---|---:|---:|
 | Model Size | 42.73 MB | 21.38 MB |
 | Inference Time | 2.57 ms | 3.04 ms |
@@ -103,31 +180,19 @@ FP16 optimization was applied to the best-performing model without additional tr
 | Recall | 65.78% | 65.79% |
 | F1 Score | 66.66% | 66.67% |
 
-**Size reduction: 49.95%**
+**Model Size Reduction: 49.95%**
 
-FP16 significantly reduced model storage requirements while maintaining approximately the same prediction accuracy. However, FP32 provided faster inference on the tested GPU.
-
-### Optimization Comparison
+FP16 reduced model size by approximately half while maintaining the same test accuracy. However, inference was slightly slower on the tested GPU.
 
 <p align="center">
   <img src="images/images/optimization_comparison.png"
-       alt="FP32 versus FP16 inference speed comparison"
-       width="700">
+       alt="FP32 and FP16 Optimization Comparison"
+       width="750">
 </p>
-
-## Model Deployment
-
-The trained model was successfully deployed for facial expression prediction using:
-
-- Uploaded facial images
-- Face detection
-- Live webcam streaming through Gradio
-
-The system displays predicted facial expression labels and model confidence scores.
 
 ### Image Prediction Results
 
-The model was tested using four facial images, producing the following predictions:
+The trained model was tested on facial images.
 
 | Predicted Expression | Confidence |
 |---|---:|
@@ -138,52 +203,146 @@ The model was tested using four facial images, producing the following predictio
 
 <p align="center">
   <img src="images/images/prediction_results.png"
-       alt="Facial expression predictions on test images"
-       width="780">
+       alt="Facial Expression Prediction Results"
+       width="800">
 </p>
 
 ### Real-Time Webcam Detection
 
-A Gradio interface was implemented to detect faces and classify facial expressions from live webcam input.
+An interactive Gradio application was implemented to perform facial expression recognition using live webcam input.
 
-The system uses the trained ResNet18 model for inference without retraining.
-
-#### Live Detection Demo
+The application uses the trained ResNet18 model to detect faces, classify facial expressions, and display prediction confidence.
 
 <p align="center">
   <img src="images/images/Screenshot%202026-10-14%20092214.png"
-       alt="Real-time facial expression recognition using Gradio"
+       alt="Real-Time Facial Expression Recognition using Gradio"
        width="850">
 </p>
 
-**Example Result:** Happy expression detected with 99.1% model confidence.
+**Example:** Happy expression detected with 99.1% prediction confidence.
 
-## Challenges and Limitations
+This confidence score refers to an individual prediction and does not represent overall model accuracy.
 
-- Some facial expressions, particularly Fear, were more difficult to classify accurately.
-- Confusion occurred between visually similar expressions, including Sad and Neutral.
-- Full Fine-Tuning showed signs of overfitting.
-- Predictions on real-world webcam images may be affected by lighting, face orientation, image quality, and differences from the training dataset.
-- Facial expressions do not necessarily represent a person's actual emotional state.
-- High prediction confidence does not guarantee a correct classification.
+## 6. Technologies Used
 
-## Future Improvements
+| Technology | Purpose |
+|---|---|
+| Python | Programming language |
+| PyTorch | Deep learning model development |
+| Torchvision | Pretrained models and image transformations |
+| ResNet18 | Transfer learning and fine-tuning |
+| NumPy | Numerical operations |
+| Pandas | Data handling |
+| OpenCV | Image processing and face detection |
+| Pillow | Image processing |
+| Scikit-learn | Model evaluation |
+| Matplotlib | Data visualization |
+| Seaborn | Confusion matrix visualization |
+| Gradio | Interactive deployment |
+| Google Colab | Development and model training |
+| GitHub | Project documentation and version control |
 
-Future work could explore:
+## 7. How to Run the Project
 
-- Stronger data augmentation
-- Hyperparameter tuning
-- Alternative pretrained architectures
-- Improved face detection
-- Evaluation on additional real-world datasets
+### Requirements
 
-## Final Conclusion
+- Python environment
+- Google Colab (recommended)
+- FER2013 dataset
+- Required Python libraries
+- Webcam access for live detection (optional)
 
-This project successfully demonstrated the application of Convolutional Neural Networks, Transfer Learning, Fine-Tuning, Model Optimization, and Deployment for facial expression recognition.
+### Step 1: Clone the Repository
 
-Among the evaluated approaches, Full Fine-Tuning achieved the best overall performance, while FP16 optimization reduced the model size without a meaningful reduction in test accuracy.
+```bash
+git clone https://github.com/nfsh46655-jpg/Facial-Emotion-Recognition-FER2013.git
+```
 
-The completed system demonstrates an end-to-end deep learning workflow, from data preprocessing and model training to evaluation, optimization, and live webcam inference.
+### Step 2: Open the Notebook
+
+Open the project notebook in Google Colab.
+
+If using the provided notebook file, open:
+
+`FER2013_Project_Corrected.ipynb`
+
+### Step 3: Install Dependencies
+
+Install the required Python libraries if they are not already available:
+
+```bash
+pip install torch torchvision numpy pandas opencv-python pillow scikit-learn matplotlib seaborn gradio
+```
+
+### Step 4: Prepare the Dataset
+
+Download and extract the FER2013 dataset.
+
+Update the dataset paths in the notebook to match the location of the training and testing images.
+
+### Step 5: Run the Notebook
+
+Execute the notebook cells in order to:
+
+1. Load and preprocess the dataset.
+2. Train the CNN model.
+3. Apply transfer learning.
+4. Perform partial and full fine-tuning.
+5. Evaluate and compare the models.
+6. Optimize the best-performing model.
+
+A GPU runtime is recommended for training.
+
+### Step 6: Run the Gradio Application
+
+Execute the deployment section of the notebook after loading the trained model.
+
+The Gradio interface allows users to:
+
+- Upload facial images
+- Use live webcam input
+- View predicted facial expressions
+- View model confidence scores
+
+Allow webcam permissions when prompted.
+
+**Note:** Dataset paths and trained model files must be available in the runtime. The Gradio interface is launched from the deployment code in the notebook.
+
+## 8. Future Improvements
+
+Future improvements could include:
+
+- Applying more advanced data augmentation.
+- Testing additional pretrained architectures.
+- Improving classification of difficult expressions such as Fear.
+- Reducing overfitting through regularization and hyperparameter tuning.
+- Improving real-time face detection under different lighting conditions.
+- Evaluating the system on additional real-world datasets.
+- Exploring further deployment optimization.
+
+## 9. SDAIA Academy GitHub Repository Link
+
+**SDAIA Academy — Official GitHub:**
+
+https://github.com/SDAIAAcademy
+
+**Project GitHub Repository:**
+
+https://github.com/nfsh46655-jpg/Facial-Emotion-Recognition-FER2013
+
+---
+
+## Project Conclusion
+
+This project demonstrates a complete deep learning workflow for facial expression recognition.
+
+Four model training approaches were implemented and compared.
+
+ResNet18 with Full Fine-Tuning achieved the highest test accuracy of **68.45%**.
+
+FP16 optimization reduced the model size by approximately **50%** without reducing its test accuracy.
+
+Finally, the model was deployed using Gradio to support facial expression predictions from uploaded images and live webcam input.
 
 ---
 
@@ -196,10 +355,10 @@ The completed system demonstrates an end-to-end deep learning workflow, from dat
 
 **Saudi Data & Artificial Intelligence Authority (SDAIA)**
 
-We acknowledge SDAIA in connection with this learning project and the development of practical skills in artificial intelligence and deep learning.
+**SDAIA Academy**
 
-**SDAIA:** https://sdaia.gov.sa/
+Official website: https://sdaia.gov.sa/
 
 ---
 
-*Built using Python, PyTorch, ResNet18, and Gradio.*
+**Facial Expression Recognition | Deep Learning | Computer Vision | PyTorch | ResNet18 | Gradio**
