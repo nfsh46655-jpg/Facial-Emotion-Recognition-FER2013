@@ -1,4 +1,4 @@
-**
+
 # Facial Expression Recognition Using Deep Learning
 
 **CNN | Transfer Learning | Fine-Tuning | Model Optimization | Real-Time Detection**
@@ -6,7 +6,7 @@
 A deep learning project that recognizes seven facial expression categories from images and live webcam input using PyTorch and ResNet18.
 
 **Developed by:** Noha Al-Shehri & Shahad Abu Shaheen  
-**Organization:** Saudi Data & Artificial Intelligence Authority (SDAIA)  
+**Acknowledgment:** Saudi Data & Artificial Intelligence Authority (SDAIA)  
 **Dataset:** FER2013
 
 ---
@@ -61,7 +61,9 @@ All evaluation metrics were calculated on the test dataset, using macro averagin
 ### Model Comparison Visualization
 
 <p align="center">
-  <img src="images/images/model_comparison.png" alt="Comparison of four deep learning models" width="780">
+  <img src="images/images/model_comparison.png"
+       alt="Comparison of four deep learning models"
+       width="780">
 </p>
 
 ## Best Performing Model
@@ -73,7 +75,9 @@ However, the training and validation results indicated some overfitting, suggest
 ### Confusion Matrix
 
 <p align="center">
-  <img src="images/images/confusion_matrix.png" alt="Confusion matrix of the optimized FP16 model" width="620">
+  <img src="images/images/confusion_matrix.png"
+       alt="Optimized FP16 confusion matrix"
+       width="620">
 </p>
 
 The model performed particularly well on Happy and Surprise expressions. Fear was more difficult to recognize, and some confusion occurred between Sad and Neutral.
@@ -81,7 +85,9 @@ The model performed particularly well on Happy and Surprise expressions. Fear wa
 ### CNN Training and Validation Performance
 
 <p align="center">
-  <img src="images/images/training_curves_cnn.png" alt="CNN training and validation curves" width="780">
+  <img src="images/images/training_curves_cnn.png"
+       alt="CNN training and validation performance"
+       width="780">
 </p>
 
 ## Model Optimization
@@ -104,7 +110,9 @@ FP16 significantly reduced model storage requirements while maintaining approxim
 ### Optimization Comparison
 
 <p align="center">
-  <img src="images/images/optimization_comparison.png" alt="FP32 versus FP16 inference speed comparison" width="700">
+  <img src="images/images/optimization_comparison.png"
+       alt="FP32 versus FP16 inference speed comparison"
+       width="700">
 </p>
 
 ## Model Deployment
@@ -129,7 +137,9 @@ The model was tested using four facial images, producing the following predictio
 | Happy | 99.94% |
 
 <p align="center">
-  <img src="images/images/prediction_results.png" alt="Facial expression predictions on test images" width="780">
+  <img src="images/images/prediction_results.png"
+       alt="Facial expression predictions on test images"
+       width="780">
 </p>
 
 ### Real-Time Webcam Detection
@@ -137,6 +147,16 @@ The model was tested using four facial images, producing the following predictio
 A Gradio interface was implemented to detect faces and classify facial expressions from live webcam input.
 
 The system uses the trained ResNet18 model for inference without retraining.
+
+#### Live Detection Demo
+
+<p align="center">
+  <img src="images/images/Screenshot%202026-10-14%20092214.png"
+       alt="Real-time facial expression recognition using Gradio"
+       width="850">
+</p>
+
+**Example Result:** Happy expression detected with 99.1% model confidence.
 
 ## Challenges and Limitations
 
@@ -183,4 +203,3 @@ We acknowledge SDAIA in connection with this learning project and the developmen
 ---
 
 *Built using Python, PyTorch, ResNet18, and Gradio.*
-**
